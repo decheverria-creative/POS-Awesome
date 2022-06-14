@@ -797,6 +797,7 @@ export default {
 
       evntBus.$emit('new_invoice', 'false');
       this.back_to_invoice();
+      evntBus.$emit('open_validacion_nit');
     },
     submit_invoice() {
       let data = {};

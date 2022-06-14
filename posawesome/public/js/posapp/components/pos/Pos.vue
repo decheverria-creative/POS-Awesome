@@ -4,6 +4,7 @@
     <Drafts></Drafts>
     <Returns></Returns>
     <NewCustomer></NewCustomer>
+    <ValidacionNit></ValidacionNit>
     <EditCustomer></EditCustomer>
     <NewAddress></NewAddress>
     <MpesaPayments></MpesaPayments>
@@ -79,6 +80,7 @@ import NewAddress from './NewAddress.vue';
 import Variants from './Variants.vue';
 import Returns from './Returns.vue';
 import MpesaPayments from './Mpesa-Payments.vue';
+import ValidacionNit from './ValidacionNit.vue';
 
 export default {
   data: function () {
@@ -100,6 +102,7 @@ export default {
     Drafts,
     ClosingDialog,
     NewCustomer,
+    ValidacionNit,
     Returns,
     PosOffers,
     PosCoupons,
@@ -221,6 +224,8 @@ export default {
       evntBus.$on('submit_closing_pos', (data) => {
         this.submit_closing_pos(data);
       });
+    evntBus.$emit('open_validacion_nit');
+
     });
   },
 };

@@ -15,7 +15,7 @@
       :no-data-text="__('Customer not found')"
       hide-details
       :filter="customFilter"
-      :disabled="readonly"
+      :disabled="true"
       append-icon="mdi-plus"
       @click:append="new_customer"
       prepend-inner-icon="mdi-account-edit"
@@ -52,8 +52,13 @@
         </template>
       </template>
     </v-autocomplete>
+    <v-btn color="primary" dark @click="buscarCliente()">{{
+              __('BUSCAR CLIENTE')
+          }}</v-btn>
   </div>
+  
 </template>
+
 
 <script>
 import { evntBus } from '../../bus';
@@ -91,8 +96,14 @@ export default {
         },
       });
     },
+
+    buscarCliente(){
+        evntBus.$emit('open_validacion_nit');
+    },
+
     new_customer() {
       evntBus.$emit('open_new_customer');
+      
     },
     edit_customer() {
       evntBus.$emit('open_edit_customer');
@@ -126,8 +137,16 @@ export default {
         this.get_customer_names();
       });
       evntBus.$on('set_customer', (customer) => {
+        console.log("Pantalla principal "+customer);
         this.customer = customer;
       });
+
+      evntBus.$on('set_new_customer', (customer) => {
+        console.log("Nuevo Cliente");
+        this.$forceUpdate();
+        this.customer = customer;
+      });
+
       evntBus.$on('add_customer_to_list', (customer) => {
         this.customers.push(customer);
       });
